@@ -1,0 +1,83 @@
+
+
+<h1 >Customer map</h1>
+<h3>Click for more info</h3>
+
+
+
+
+<div id="container">
+
+<div id="map"></div>
+
+</div>
+
+
+
+
+
+
+
+<script>
+  console.log(<%=@nb_customer_addresses%>)
+
+
+
+
+
+
+
+
+    function initMap() {
+        let bounds = new google.maps.LatLngBounds();
+        let lat = <%=@customer_lat%>;
+        let lng = <%=@customer_lng%>;
+        let client_name = <%=raw @client_name%>;
+        let client_address = <%=raw @customer_addresses %>
+        let client_nb_batterries = <%=raw @nb_batteries%>
+        let client_nb_columns = <%=raw @nb_columns%>
+        let client_nb_elevator = <%=raw @nb_elevator%>
+        let contact_name = <%=raw @contac_name %>
+
+
+
+
+        let mapOptions = {
+            center: new google.maps.LatLng("41.881832", "-87.623177"),
+            zoom: 4
+        }
+
+        let map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
+    
+    for (i = 0; i< <%=@nb_customer_addresses%>; i++){
+    
+
+        let marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat[i],lng[i]),
+            map: map
+
+        });
+        bounds.extend(marker.position);
+
+        function addInfoWindow(marker, message) {
+            
+            var infoWindow = new google.maps.InfoWindow({
+                content: message,
+            maxWidth: 200
+
+
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+        let customer_info = 'Company name: '+ client_name[i] + ' Address: ' + client_address[i] + ' Number of batteries: ' + client_nb_batterries[i] + ' Number of columns: ' + client_nb_columns[i] + ' Number of elevator: ' + client_nb_elevator[i] + ' Technical Conctact: ' + contact_name[i];
+        addInfoWindow(marker, customer_info)
+
+     }
+    }
+       
+</script>
+<script async defer src=<%=raw"https://maps.googleapis.com/maps/api/js?key=#{ENV['google_map_api_key']}&callback=initMap"%> type="text/javascript"></script>
