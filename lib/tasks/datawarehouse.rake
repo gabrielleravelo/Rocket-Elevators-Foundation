@@ -156,8 +156,8 @@ Building.all.each do |building|
 
                 )
               end
-              puts column.elevators.ids[rand(0..(column.elevators.ids.length() - 1))]
-              puts column
+            #   puts column.elevators.ids[rand(0..(column.elevators.ids.length() - 1))]
+            #   puts column
     end
   end  
  end   
