@@ -32,19 +32,19 @@ class Elevator < ApplicationRecord
 
 
     # display message after change
-    before_update :beforestatuschange
+    # before_update :beforestatuschange
     after_update :afterstatuschange
     
-    def beforestatuschange
-        @oldstatus = status_was    
-    end
+    # def beforestatuschange
+    #     @oldstatus = status_was    
+    # end
         
 
     def afterstatuschange
         client = Slack::Web::Client.new
         client.auth_test
-        if status != @oldstatus
-            client.chat_postMessage(channel: '#elevator_operations', text: "The Elevator #{id} with Serial Number #{serial_number} changed status from #{@oldstatus} to #{status}", as_user: true)
+        if status.downcase != @oldstatus.downcase
+            client.chat_postMessage(channel: '#elevator_operations', text: "The Elevator #{id} with Serial Number #{serial_number} changed status from #{@oldstatus.downcase} to #{status.downcase}", as_user: true)
         end
     end
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  # get 'interventions/interventionform'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   get 'corporate', to: 'home#corporate'
@@ -31,6 +32,8 @@ Rails.application.routes.draw do
   get '/audioPage', to: 'audio#audio'
   get '/playAudio', to: 'audio#playAudio'
 
+  # Interventions request 
+  get '/interventions', to: 'interventions#interventionform'
 
   #graphsql
   post "/graphql", to: "graphql#execute"
