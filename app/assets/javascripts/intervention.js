@@ -80,10 +80,10 @@ $("#batterycustomer").change(function () {
         // }));
         $('#columncustomer').prop("disabled", true);
     } 
-    $('#columncustomer').append($('<option>',
-        {
-            text: "None"
-        }));
+    // $('#columncustomer').append($('<option>',
+    //     {
+    //         text: "None"
+    //     }));
     let battery = $("#batterycustomer").find(":selected").val();
     Rails.ajax({
         url: '/getColumnByBattery/' +battery,

@@ -138,18 +138,18 @@ ActiveRecord::Schema.define(version: 2022_11_22_152435) do
   end
 
   create_table "interventions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.integer "author"
-    t.integer "customerId"
-    t.integer "buildingId"
-    t.integer "batteryId"
+    t.integer "author", null: false
+    t.integer "customerId", null: false
+    t.integer "buildingId", null: false
+    t.integer "batteryId", null: false
     t.integer "columnId"
     t.integer "elevatorId"
     t.integer "employeeId"
     t.timestamp "interventionStartAt"
     t.timestamp "interventionEndAt"
-    t.string "result"
+    t.string "result", default: "Incomplete", null: false
     t.text "report"
-    t.string "status"
+    t.string "status", default: "Pending", null: false
   end
 
   create_table "leads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
