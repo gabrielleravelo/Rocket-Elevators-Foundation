@@ -22,3 +22,4 @@
 //= require bootstrap.js
 //= require quote.js
 //= require site.js
+//= require intervention.js

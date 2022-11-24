@@ -102,7 +102,7 @@
                               </a>
                            </li>
                            <% if user_signed_in? %>
-                              <li>
+                              <li class="backoffice">
                                  <li>
                                     <!-- Intervention -->
                                     <a href="/interventions">
@@ -126,9 +126,10 @@
                                     AUDIO
                                     </a>
                                  </li>
-                              <li>
-                                 <!-- LOG OUT -->
-                                 <%= link_to "LOG OUT", destroy_user_session_path, method: :delete  %>
+                                 <li>
+                                    <!-- LOG OUT -->
+                                    <%= link_to "LOG OUT", destroy_user_session_path, method: :delete  %>
+                                 </li>
                               </li>
                               
                            <% else %>
