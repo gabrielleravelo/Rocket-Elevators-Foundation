@@ -6,13 +6,7 @@ require 'json'
 class InterventionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def interventionform
-    # @customers = Customer.all
-    # @buildings = Building.where("customer_id = ?", Customer.first.id)
   end
-
-  # def show
-  #   @building = Building.find_by("id = ?", params[:building_id])
-  # end
   
   def getBuildingByCustomer
     @buildings = Building.where(customer_id: params[:id])
@@ -67,7 +61,7 @@ class InterventionsController < ApplicationController
 
     # Freshdesk
     requester = current_employee
-    requester_fullname = "#{requester.first_name} #{requester.last_name }"
+    requester_fullname = "#{requester.first_name} #{requester.last_name}"
     customer = Customer.find(params[:name_company])
     buildingID = params[:building_customer]
     batteryID = params[:battery_customer]
@@ -113,7 +107,8 @@ class InterventionsController < ApplicationController
     password_or_x = 'X'
 
     
-    json_payload = { status: 2,  
+    json_payload = { 
+        status: 2,  
         priority: 1,
         type: "Incident",
         subject: "Request",

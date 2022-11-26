@@ -6,14 +6,31 @@ $("#customer_company").change(function () {
         {
             text: "Select a Building"
         }));
-        // $('#buildingcustomer').prop("disabled", true);
+        $('#buildingcustomer').prop("disabled", true);
 
-        // $('#batterycustomer').empty();
-        // $('#batterycustomer').prop("disabled", true)
+        $('#batterycustomer').empty();
+        $('#batterycustomer').append($('<option>',
+        {
+            text: "Select a Battery"
+        }));
+        $('#batterycustomer').prop("disabled", true)
+
+        $('#columncustomer').empty();
+        $('#columncustomer').append($('<option>',
+        {
+            text: "None"
+        }));
+        $('#columncustomer').prop("disabled", true);
+
+        $('#elevatorcustomer').empty();
+        $('#elevatorcustomer').append($('<option>',
+        {
+            text: "None"
+        }));
+        $('#elevatorcustomer').prop("disabled", true);
 
     }
     $('#buildingcustomer').empty();
-        // $('#buildingcustomer').empty();
     $('#buildingcustomer').append($('<option>',
     {
         text: "Select a Building"
@@ -45,13 +62,32 @@ $("#customer_company").change(function () {
 $("#buildingcustomer").change(function () {
     if($("#buildingcustomer").find(":selected").text() == 'Select a Building'){
         $('#batterycustomer').empty();
-        // $('#buildingcustomer').append($('<option>',
-        // {
-        //     text: "Select a Battery"
-        // }));
+        $('#batterycustomer').append($('<option>',
+        {
+            text: "Select a Battery"
+        }));
         $('#batterycustomer').prop("disabled", true);
+
+        $('#columncustomer').empty();
+        $('#columncustomer').append($('<option>',
+        {
+            text: "None"
+        }));
+        $('#columncustomer').prop("disabled", true);
+
+        $('#elevatorcustomer').empty();
+        $('#elevatorcustomer').append($('<option>',
+        {
+            text: "None"
+        }));
+        $('#elevatorcustomer').prop("disabled", true);
     
     }
+    $('#batterycustomer').empty();
+        $('#batterycustomer').append($('<option>',
+        {
+            text: "Select a Battery"
+        }));
     
     let building = $("#buildingcustomer").find(":selected").val();
     Rails.ajax({
@@ -114,10 +150,7 @@ $("#columncustomer").change(function () {
         }));
         $('#elevatorcustomer').prop("disabled", true);
     } 
-    // $('#elevatorcustomer').append($('<option>',
-    //     {
-    //         text: "None"
-    //     }));
+    
     let column = $("#columncustomer").find(":selected").val();
     Rails.ajax({
         url: '/getElevatorByColumn/' +column,

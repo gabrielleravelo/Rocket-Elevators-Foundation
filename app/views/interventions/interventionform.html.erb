@@ -55,64 +55,55 @@
 					 
                     <form id="form-interventions" autocomplete="off"  action="/interventions" method="post" onSubmit="return confirm('Do you want to submit?')">
 						<fieldset>
-								<div class="row">
-									<div class="col-md-12">
-										<label for="name_company">Customer</label>
-                                        <div class="field" id="customer_company">
-											
-                                            <%= collection_select(:company_name, :company_name, Customer.order(:company_name), :id, :company_name, {:prompt => 'Select a customer'}, id: 'customer_company', name: 'name_company', class: 'field', class: 'col-md-12') %>
-											
-                                        </div>
-										
-									</div>									
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<label for="building_customer">Building</label>
-										<select id="buildingcustomer" class="col-md-12" name='building_customer', disabled><option value="0">Select a Building</option></select>
-									                             
-									</div>									
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<label for="battery_customer">Battery</label>
-										<select id="batterycustomer" class="col-md-12" name='battery_customer', disabled><option value="0">Select a Battery</option></select>
-									                             
-									</div>									
-								</div>								
-								<div class="row">
-									<div class="col-md-12">
-										<label for="column_customer">Column</label>
-										<select id="columncustomer" class="col-md-12" name='column_customer', disabled><option value="0">None</option></select>
-									                             
-									</div>									
-								</div>
-							
-								<div class="row">
-									<div class="col-md-12">
-										<label for="elevator_customer">Elevator</label>
-										<select id="elevatorcustomer" class="col-md-12" name='elevator_customer', disabled><option value="0">None</option></select>
-									                             
-									</div>									
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<label for="employeename">Employee</label>
-                                        	<%= collection_select(:first_name, :first_name, Employee.order(:first_name), :id, :first_name, {:prompt => 'None'}, id: 'employeeid', name: 'employeename', class: 'field', class: 'col-md-12') %>
-									</div>									
-								</div>
-
-
-								<div class="row">
-									<div class="col-md-12">
-										<label for="intervention_description">Description *</label>
-										<textarea required maxlength="10000" rows="5" class="form-control"
-										name="description" id="intervention_description"></textarea>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="name_company">Customer</label>
+									<div class="field" id="customer_company">
+										<%= collection_select(:company_name, :company_name, Customer.order(:company_name), :id, :company_name, {:prompt => 'Select a customer'}, id: 'customer_company', name: 'name_company', class: 'field', class: 'col-md-12') %>
 									</div>
+								</div>									
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="building_customer">Building</label>
+									<select id="buildingcustomer" class="col-md-12" name='building_customer', disabled><option value="0">Select a Building</option></select>
+																
+								</div>									
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="battery_customer">Battery</label>
+									<select id="batterycustomer" class="col-md-12" name='battery_customer', disabled><option value="0">Select a Battery</option></select>
+																
+								</div>									
+							</div>								
+							<div class="row">
+								<div class="col-md-12">
+									<label for="column_customer">Column</label>
+									<select id="columncustomer" class="col-md-12" name='column_customer', disabled><option value="0">None</option></select>
+								</div>									
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="elevator_customer">Elevator</label>
+									<select id="elevatorcustomer" class="col-md-12" name='elevator_customer', disabled><option value="0">None</option></select>
+								</div>									
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="employeename">Employee</label>
+										<%= collection_select(:first_name, :first_name, Employee.order(:first_name), :id, :first_name, {:prompt => 'None'}, id: 'employeeid', name: 'employeename', class: 'field', class: 'col-md-12') %>
+								</div>									
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label for="intervention_description">Description *</label>
+									<textarea required maxlength="10000" rows="5" class="form-control"
+									name="description" id="intervention_description"></textarea>
 								</div>
-
+							</div>
 						</fieldset>
-						 <input type="submit" value="Submit" >
+						<input type="submit" value="Submit" >
 					</form>
 				</div>
 				<!-- /FORM -->
