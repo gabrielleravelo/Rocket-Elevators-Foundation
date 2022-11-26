@@ -1,29 +1,25 @@
 # README
 
-## GraphQL
-GraphQL is a powerful tool that helps save precious time. Like the REST API, GraphQL fetches some information, or data, in the database. The main difference is the GraphQL will only fetch what we want, so there won't be unnecessary data. It will also fetches our information in one query, which makes GraphQL faster when we deal with a big database.
+This week, the project is about to add a form for action requests.
 
-### Install
-The installation of GraphQL is really simple, it's a command in the terminal. We installed also GraphiQL which is a visual representation of the commands we can do to fetch data, working similarly to Postamn. We can find the data we want directly on GraphiQL.
+### Intervention form
+I added a new section Intervention and a new page for the form. I used html, JS and Ajax. I created a new database intervention with Rails. I added controller file and 
 
-We defined our endpoints in routes.rb to link GraphiQL and Postman to our database.
+The intervention request form
+![dropdowncustomer](https://user-images.githubusercontent.com/113941321/204069734-4641bb3b-6138-4c3e-9307-1356edffecb0.png)
 
-In order to make GraphQL works we needed to create some types. These types were the files where we entered the fields we needed in the database. It is also the place where we linked two or more tables. For instance to fetch the address of a building in our database, we added building in our `interventionType` class, which made the building's info available with an intervention query. 
-Here's the example I'm talking about:
-```
-query{
-  intervention(id:18){
-        id
-        interventionStartAt
-        interventionEndAt
-        buildingId
-        building{
-            id
-            buildingAddress
-        }
-    }
-}
-```
+![dropdownbattery](https://user-images.githubusercontent.com/113941321/204069749-1faaab7a-079e-4547-9605-d8c3c5fb500a.png)
 
-### Note
-we have integrated the graphql API in the program of our website. So we used the same repo for the site and the graphql API
+### Freshdesk API
+- Create a new account in https://freshdesk.com/
+- Get the FreshDesk domain
+- Get the FreshDesk API key
+
+A ticket will be send via FreshDesk when a user submit an intervention form.
+
+To access to the FreshDesk account: domaine :https://rocketelevator-helpdesk.freshdesk.com/ , e-mail:ravegab9@gmail.com , password: Codeboxx321!
+
+Freshdesk ticket
+![freshdeskintervention](https://user-images.githubusercontent.com/113941321/204068271-4a141398-45fe-4ef1-a004-26ddda3cf2cb.png)
+
+
