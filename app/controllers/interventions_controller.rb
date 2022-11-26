@@ -52,40 +52,54 @@ class InterventionsController < ApplicationController
 
   def create
     current_employee = current_user.employee
-    @intervention= Intervention.new()
-    @intervention.author = current_employee.id
-    @intervention.customerId = params[:name_company]
-    @intervention.buildingId = params[:building_customer]
-    @intervention.batteryId = params[:battery_customer]
-    @intervention.columnId = params[:column_customer]
-    @intervention.elevatorId = params[:elevator_customer]
-    # Si None doit être Null
-    @intervention.employeeId = params[:employeename]
-    # Default value = Incomplete
-    # @intervention.result = params[:message]
-    @intervention.report = params[:description]
-    # Default value = Pending
-    # @intervention.status = "Pending"
-
-    @intervention.save()
+    
+    intervention= Intervention.new()
+    intervention.author = current_employee.id
+    intervention.customerId = params[:name_company]
+    intervention.buildingId = params[:building_customer]
+    intervention.batteryId = params[:battery_customer]
+    intervention.columnId = params[:column_customer] == "0" ? nil : params[:column_customer]
+    intervention.elevatorId = params[:elevator_customer] == "0" ? nil : params[:elevator_customer]
+    intervention.employeeId = params[:employeename] #== "0" ? nil : params[:employeename]
+    intervention.report = params[:description]
+    intervention.save()
 
 
     # Freshdesk
     requester = current_employee
+    requester_fullname = "#{requester.first_name} #{requester.last_name }"
     customer = Customer.find(params[:name_company])
     buildingID = params[:building_customer]
-    columnID = params[:column_customer]
     batteryID = params[:battery_customer]
-    elevatorID = params[:elevator_customer]
-    employee_assigned = Employee.find(params[:employeename])
+    
+
+    if params[:column_customer] != "0"
+      columnID = params[:column_customer]
+    else
+      columnID = "None"
+    end
+
+    if elevatorID = params[:elevator_customer] != "0"
+      elevatorID = params[:elevator_customer]
+    else
+      elevatorID = "None"
+    end
+
+    if params[:employeename] != ""
+      employee_assigned = Employee.find(params[:employeename])
+      employee_assigned_fullname = "#{employee_assigned.first_name} #{employee_assigned.last_name}"
+    else
+      employee_assigned_fullname = "None"
+    end
+    
     description = params[:description]
 
     
-    ticket = "#{requester.first_name} #{requester.last_name } send an intervention request for the customer #{customer.company_name}.<br> 
-            The building ID is #{buildingID},<br> The column ID is #{columnID}.<br>
-            the battery ID #{batteryID},<br>  the elevator ID #{elevatorID}.<br>
-            #{employee_assigned.first_name} #{employee_assigned.last_name} is assigned to the task.<br>
-            Intervention description: #{description}<br>"
+    ticket = "#{requester_fullname} has sent an intervention request for the customer #{customer.company_name}.<br> 
+            The building ID is #{buildingID}.<br> The battery ID is #{batteryID}.<br>
+            The column ID is #{columnID}.<br> The elevator ID is #{elevatorID}.<br>
+            The employee to be assigned to the task is #{employee_assigned_fullname}<br>
+            Description of the request for intervention: #{description}<br>"
 
 
     # Your freshdesk domain
@@ -103,7 +117,8 @@ class InterventionsController < ApplicationController
         type: "Incident",
         subject: "Request",
         name: requester.first_name,
-        unique_external_id: requester.first_name,
+        email: requester.email,
+        # unique_external_id: requester.first_name,
         description: ticket
     }.to_json
 

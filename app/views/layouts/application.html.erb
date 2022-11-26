@@ -102,14 +102,13 @@
                               </a>
                            </li>
                            <% if user_signed_in? %>
-                              <li class="backoffice">
+                              <li class="dropdown">
                                  <li>
-                                    <!-- Intervention -->
+                                    <!-- intervention bouton -->                                   
                                     <a href="/interventions">
-                                    INTERVENTION
+                                    INTERVENTIONS
                                     </a>
                                  </li>
-                                 <li class="dropdown">
                                     <!-- BACK-OFFICE -->
                                     <a class="dropdown-toggle" href="/admin">
                                     BACK-OFFICE
@@ -126,10 +125,9 @@
                                     AUDIO
                                     </a>
                                  </li>
-                                 <li>
-                                    <!-- LOG OUT -->
-                                    <%= link_to "LOG OUT", destroy_user_session_path, method: :delete  %>
-                                 </li>
+                              <li>
+                                 <!-- LOG OUT -->
+                                 <%= link_to "LOG OUT", destroy_user_session_path, method: :delete  %>
                               </li>
                               
                            <% else %>

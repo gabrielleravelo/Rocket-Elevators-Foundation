@@ -1,9 +1,3 @@
-<%# <h1>Interventions#interventionform</h1> %>
-<%# <p>Find me in app/views/interventions/interventionform.html.erb</p> %>
-
-
-
-
 		<section class="page-header" style="background-image: url('assets/images/skyrise.jpg');">
 			<div class="container">
 				<h1>INTERVENTION REQUEST FORM</h1>
@@ -35,7 +29,7 @@
 			WARNING! Do not change the `email` and `name`!
 						contact[name][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
 						contact[email][required] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
-	-->
+			-->
 
 					<!-- Alert Success -->
 					<div id="alert_success" class="alert alert-success mb-30">
@@ -75,21 +69,21 @@
 								<div class="row">
 									<div class="col-md-12">
 										<label for="building_customer">Building</label>
-										<select id="buildingcustomer" class="col-md-12" name='building_customer', disabled><option>Select a Building</option></select>
+										<select id="buildingcustomer" class="col-md-12" name='building_customer', disabled><option value="0">Select a Building</option></select>
 									                             
 									</div>									
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<label for="battery_customer">Battery</label>
-										<select id="batterycustomer" class="col-md-12" name='battery_customer', disabled><option>Select a Battery</option></select>
+										<select id="batterycustomer" class="col-md-12" name='battery_customer', disabled><option value="0">Select a Battery</option></select>
 									                             
 									</div>									
 								</div>								
 								<div class="row">
 									<div class="col-md-12">
 										<label for="column_customer">Column</label>
-										<select id="columncustomer" class="col-md-12" name='column_customer', disabled><option>None</option></select>
+										<select id="columncustomer" class="col-md-12" name='column_customer', disabled><option value="0">None</option></select>
 									                             
 									</div>									
 								</div>
@@ -97,7 +91,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<label for="elevator_customer">Elevator</label>
-										<select id="elevatorcustomer" class="col-md-12" name='elevator_customer', disabled><option>None</option></select>
+										<select id="elevatorcustomer" class="col-md-12" name='elevator_customer', disabled><option value="0">None</option></select>
 									                             
 									</div>									
 								</div>
