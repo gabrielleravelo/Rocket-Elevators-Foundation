@@ -77,6 +77,7 @@ class InterventionsController < ApplicationController
       columnID = params[:column_customer]
     else
       columnID = "None"
+      elevatorID = "None"
     end
 
     if elevatorID = params[:elevator_customer] != "0"
@@ -116,9 +117,8 @@ class InterventionsController < ApplicationController
         priority: 1,
         type: "Incident",
         subject: "Request",
-        name: requester.first_name,
+        name: requester_fullname,
         email: requester.email,
-        # unique_external_id: requester.first_name,
         description: ticket
     }.to_json
 
