@@ -10,7 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_152435) do
+ActiveRecord::Schema.define(version: 2023_01_11_173124) do
+
+  create_table "AspNetRoleClaims", primary_key: "Id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "RoleId", null: false
+    t.text "ClaimType", limit: 4294967295
+    t.text "ClaimValue", limit: 4294967295
+    t.index ["RoleId"], name: "IX_AspNetRoleClaims_RoleId"
+  end
+
+  create_table "AspNetRoles", primary_key: "Id", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "Name", limit: 256
+    t.string "NormalizedName", limit: 256
+    t.text "ConcurrencyStamp", limit: 4294967295
+    t.index ["NormalizedName"], name: "RoleNameIndex", unique: true
+  end
+
+  create_table "AspNetUserClaims", primary_key: "Id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "UserId", null: false
+    t.text "ClaimType", limit: 4294967295
+    t.text "ClaimValue", limit: 4294967295
+    t.index ["UserId"], name: "IX_AspNetUserClaims_UserId"
+  end
+
+  create_table "AspNetUserLogins", primary_key: ["LoginProvider", "ProviderKey"], options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "LoginProvider", limit: 128, null: false
+    t.string "ProviderKey", limit: 128, null: false
+    t.text "ProviderDisplayName", limit: 4294967295
+    t.string "UserId", null: false
+    t.index ["UserId"], name: "IX_AspNetUserLogins_UserId"
+  end
+
+  create_table "AspNetUserRoles", primary_key: ["UserId", "RoleId"], options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "UserId", null: false
+    t.string "RoleId", null: false
+    t.index ["RoleId"], name: "IX_AspNetUserRoles_RoleId"
+  end
+
+  create_table "AspNetUserTokens", primary_key: ["UserId", "LoginProvider", "Name"], options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "UserId", null: false
+    t.string "LoginProvider", limit: 128, null: false
+    t.string "Name", limit: 128, null: false
+    t.text "Value", limit: 4294967295
+  end
+
+  create_table "AspNetUsers", primary_key: "Id", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "UserName", limit: 256
+    t.string "NormalizedUserName", limit: 256
+    t.string "Email", limit: 256
+    t.string "NormalizedEmail", limit: 256
+    t.boolean "EmailConfirmed", null: false
+    t.text "PasswordHash", limit: 4294967295
+    t.text "SecurityStamp", limit: 4294967295
+    t.text "ConcurrencyStamp", limit: 4294967295
+    t.text "PhoneNumber", limit: 4294967295
+    t.boolean "PhoneNumberConfirmed", null: false
+    t.boolean "TwoFactorEnabled", null: false
+    t.datetime "LockoutEnd", precision: 6
+    t.boolean "LockoutEnabled", null: false
+    t.integer "AccessFailedCount", null: false
+    t.index ["NormalizedEmail"], name: "EmailIndex"
+    t.index ["NormalizedUserName"], name: "UserNameIndex", unique: true
+  end
+
+  create_table "__EFMigrationsHistory", primary_key: "MigrationId", id: :string, limit: 150, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "ProductVersion", limit: 32, null: false
+  end
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -134,6 +199,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_152435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.json "facial_rec"
     t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
@@ -213,6 +279,12 @@ ActiveRecord::Schema.define(version: 2022_11_22_152435) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "AspNetRoleClaims", "AspNetRoles", column: "RoleId", primary_key: "Id", name: "FK_AspNetRoleClaims_AspNetRoles_RoleId", on_delete: :cascade
+  add_foreign_key "AspNetUserClaims", "AspNetUsers", column: "UserId", primary_key: "Id", name: "FK_AspNetUserClaims_AspNetUsers_UserId", on_delete: :cascade
+  add_foreign_key "AspNetUserLogins", "AspNetUsers", column: "UserId", primary_key: "Id", name: "FK_AspNetUserLogins_AspNetUsers_UserId", on_delete: :cascade
+  add_foreign_key "AspNetUserRoles", "AspNetRoles", column: "RoleId", primary_key: "Id", name: "FK_AspNetUserRoles_AspNetRoles_RoleId", on_delete: :cascade
+  add_foreign_key "AspNetUserRoles", "AspNetUsers", column: "UserId", primary_key: "Id", name: "FK_AspNetUserRoles_AspNetUsers_UserId", on_delete: :cascade
+  add_foreign_key "AspNetUserTokens", "AspNetUsers", column: "UserId", primary_key: "Id", name: "FK_AspNetUserTokens_AspNetUsers_UserId", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "batteries", "buildings"
   add_foreign_key "batteries", "employees"
