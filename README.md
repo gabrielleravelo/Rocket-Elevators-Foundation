@@ -17,9 +17,8 @@ The intervention request form
 
 A ticket will be send via FreshDesk when a user submit an intervention form.
 
-To access to the FreshDesk account: domaine :https://rocketelevator-helpdesk.freshdesk.com/ , e-mail:ravegab9@gmail.com , password: Codeboxx321!
-
 Freshdesk ticket
+
 ![freshdeskintervention](https://user-images.githubusercontent.com/113941321/204068271-4a141398-45fe-4ef1-a004-26ddda3cf2cb.png)
 
 
